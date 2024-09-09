@@ -15,6 +15,11 @@ run/main_scene="res://pong.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/size/viewport_height=400
+buses/size/viewport_width=640
+
 [display]
 
 window/size/viewport_width=640
