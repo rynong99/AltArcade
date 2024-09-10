@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://dhv7jfemcrros" path="res://impact.mp3" id="3_hd0uc"]
 [ext_resource type="AudioStream" uid="uid://dg7qpk43qcq0a" path="res://musicalball.mp3" id="4_onyyi"]
 [ext_resource type="Texture2D" uid="uid://klfk54u3hy42" path="res://separator.png" id="4_x0mh8"]
+[ext_resource type="Script" path="res://music.gd" id="6_6txuu"]
 [ext_resource type="AudioStream" uid="uid://dq2f3feggdlbg" path="res://Loss.mp3" id="6_o7sby"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wrmbq"]
@@ -28,39 +29,26 @@ func _process(delta: float) -> void:
 	pass
 "
 
-[sub_resource type="GDScript" id="GDScript_aa5wx"]
-script/source = "extends AudioStreamPlayer2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	var ball_pos = $Ball.position
-	var paddle_pos = $Left.position
-	$Music.panning = (ball_pos.y - paddle_pos.y)/400
-"
-
 [node name="Game" type="Node2D"]
 script = ExtResource("1_60igg")
 
-[node name="Ball" type="Sprite2D" parent="."]
+[node name="Scene" type="Node2D" parent="."]
 position = Vector2(320, 188)
 scale = Vector2(5, 5)
+
+[node name="Ball" type="Sprite2D" parent="Scene"]
+scale = Vector2(1, 1)
 texture = ExtResource("1_wbji1")
 
-[node name="Score" type="AudioStreamPlayer" parent="Ball"]
+[node name="Score" type="AudioStreamPlayer" parent="Scene/Ball"]
 stream = ExtResource("3_c1idy")
 
-[node name="Hit" type="AudioStreamPlayer2D" parent="Ball"]
+[node name="Hit" type="AudioStreamPlayer2D" parent="Scene/Ball"]
 stream = ExtResource("3_hd0uc")
 volume_db = 1.0
 max_distance = 640.0
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Ball"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Scene/Ball"]
 physics_interpolation_mode = 2
 amount = 7
 process_material = SubResource("ParticleProcessMaterial_wrmbq")
@@ -69,20 +57,43 @@ lifetime = 0.5
 speed_scale = 0.4
 script = SubResource("GDScript_d7yl5")
 
-[node name="Music" type="AudioStreamPlayer2D" parent="Ball"]
+[node name="Music" type="AudioStreamPlayer2D" parent="Scene/Ball"]
 stream = ExtResource("4_onyyi")
 autoplay = true
 max_distance = 640.0
 attenuation = 1.5
 panning_strength = 5.0
-script = SubResource("GDScript_aa5wx")
+script = ExtResource("6_6txuu")
 
-[node name="Loss" type="AudioStreamPlayer" parent="Ball"]
+[node name="Loss" type="AudioStreamPlayer" parent="Scene/Ball"]
 stream = ExtResource("6_o7sby")
 volume_db = 1.0
 
+[node name="Right" type="Sprite2D" parent="Scene"]
+position = Vector2(-26.6, -24.2)
+rotation = 1.5708
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_0upbg")
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="Scene/Right"]
+physics_interpolation_mode = 2
+position = Vector2(0, 0.5)
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_wrmbq")
+texture = ExtResource("3_0upbg")
+lifetime = 0.1
+speed_scale = 0.5
+script = SubResource("GDScript_d7yl5")
+
+[node name="Seperator" type="Sprite2D" parent="Scene"]
+position = Vector2(-24, 26.4)
+rotation = 1.5708
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_x0mh8")
+
 [node name="Left" type="Sprite2D" parent="."]
-position = Vector2(67, 183)
+position = Vector2(187, 577)
+rotation = 1.5708
 scale = Vector2(3, 3)
 texture = ExtResource("2_0xgpv")
 
@@ -98,22 +109,3 @@ script = SubResource("GDScript_d7yl5")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="Left"]
 current = true
-
-[node name="Right" type="Sprite2D" parent="."]
-position = Vector2(577, 187)
-scale = Vector2(3, 3)
-texture = ExtResource("3_0upbg")
-
-[node name="GPUParticles2D3" type="GPUParticles2D" parent="Right"]
-physics_interpolation_mode = 2
-position = Vector2(0, 0.5)
-amount = 10
-process_material = SubResource("ParticleProcessMaterial_wrmbq")
-texture = ExtResource("3_0upbg")
-lifetime = 0.1
-speed_scale = 0.5
-script = SubResource("GDScript_d7yl5")
-
-[node name="Seperator" type="Sprite2D" parent="."]
-position = Vector2(320, 200)
-texture = ExtResource("4_x0mh8")
