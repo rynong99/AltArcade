@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhe3mic0131t3"]
+[gd_scene load_steps=12 format=3 uid="uid://bhe3mic0131t3"]
 
 [ext_resource type="Script" path="res://pong.gd" id="1_60igg"]
 [ext_resource type="Texture2D" uid="uid://27ps8pkgrf0l" path="res://ball.png" id="1_wbji1"]
@@ -26,22 +26,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-"
-
-[sub_resource type="GDScript" id="GDScript_aa5wx"]
-script/source = "extends AudioStreamPlayer2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	var ball_pos = $Ball.position
-	var paddle_pos = $Left.position
-	$Music.panning = (ball_pos.y - paddle_pos.y)/400
 "
 
 [node name="Game" type="Node2D"]
@@ -75,7 +59,6 @@ autoplay = true
 max_distance = 640.0
 attenuation = 1.5
 panning_strength = 5.0
-script = SubResource("GDScript_aa5wx")
 
 [node name="Loss" type="AudioStreamPlayer" parent="Ball"]
 stream = ExtResource("6_o7sby")

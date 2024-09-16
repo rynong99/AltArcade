@@ -68,4 +68,3 @@ func _process(delta):
 		#right_pos.y += PAD_SPEED * delta
 
 	$Right.position = right_pos
-	$Music.panningstrength = (ball_pos.y - left_pos.y)/400

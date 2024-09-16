@@ -1,0 +1,112 @@
+[gd_scene load_steps=13 format=3 uid="uid://ckcgn82n5p0tl"]
+
+[ext_resource type="Script" path="res://play_area.gd" id="1_6o025"]
+[ext_resource type="Script" path="res://ball.gd" id="1_8jdvn"]
+[ext_resource type="AudioStream" uid="uid://dg7qpk43qcq0a" path="res://musicalball.mp3" id="3_v7a4m"]
+[ext_resource type="AudioStream" uid="uid://dhv7jfemcrros" path="res://impact.mp3" id="4_40nlw"]
+[ext_resource type="Script" path="res://paddle.gd" id="4_xmwbc"]
+[ext_resource type="Script" path="res://aipaddle.gd" id="5_vvxoe"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_m1an5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hf628"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_vxacr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1htdx"]
+size = Vector2(803, 1199)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1sfdf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ysux"]
+size = Vector2(227, 20)
+
+[node name="Game" type="Node2D"]
+position = Vector2(200, 200)
+metadata/_edit_group_ = true
+
+[node name="PlayArea" type="Area2D" parent="."]
+position = Vector2(3, 0)
+script = ExtResource("1_6o025")
+
+[node name="Ball" type="Area2D" parent="PlayArea"]
+position = Vector2(400, 600)
+script = ExtResource("1_8jdvn")
+speed = Vector2(250, 250)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayArea/Ball"]
+scale = Vector2(20, 20)
+texture = SubResource("CanvasTexture_m1an5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea/Ball"]
+shape = SubResource("RectangleShape2D_hf628")
+
+[node name="AnnoyingMusic" type="AudioStreamPlayer2D" parent="PlayArea/Ball"]
+stream = ExtResource("3_v7a4m")
+autoplay = true
+max_distance = 1200.0
+attenuation = 5.0
+panning_strength = 10.0
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="PlayArea/Ball"]
+stream = ExtResource("4_40nlw")
+max_distance = 1000.0
+
+[node name="Sprite2D2" type="Sprite2D" parent="PlayArea"]
+position = Vector2(815, 585.5)
+scale = Vector2(29, 1229)
+texture = SubResource("CanvasTexture_vxacr")
+
+[node name="Sprite2D3" type="Sprite2D" parent="PlayArea"]
+position = Vector2(398.375, -14.5)
+scale = Vector2(804.75, 29)
+texture = SubResource("CanvasTexture_vxacr")
+
+[node name="Sprite2D4" type="Sprite2D" parent="PlayArea"]
+position = Vector2(398.5, 1214)
+scale = Vector2(863, 28)
+texture = SubResource("CanvasTexture_vxacr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
+position = Vector2(398.5, 599.5)
+shape = SubResource("RectangleShape2D_1htdx")
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayArea"]
+position = Vector2(-18, 585.5)
+scale = Vector2(29, 1229)
+texture = SubResource("CanvasTexture_vxacr")
+
+[node name="Paddle" type="Area2D" parent="PlayArea"]
+position = Vector2(400, 75)
+script = ExtResource("5_vvxoe")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayArea/Paddle"]
+position = Vector2(7.62939e-06, 1)
+scale = Vector2(227, 21)
+texture = SubResource("CanvasTexture_1sfdf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea/Paddle"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_8ysux")
+
+[node name="Paddle" type="Area2D" parent="."]
+position = Vector2(400, 1125)
+script = ExtResource("4_xmwbc")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Paddle"]
+position = Vector2(7.62939e-06, 1)
+scale = Vector2(227, 21)
+texture = SubResource("CanvasTexture_1sfdf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paddle"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_8ysux")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Paddle"]
+current = true
+
+[connection signal="area_entered" from="PlayArea/Paddle" to="PlayArea/Ball" method="_on_paddle_area_entered"]
+[connection signal="area_entered" from="Paddle" to="PlayArea/Ball" method="_on_paddle_area_entered"]
