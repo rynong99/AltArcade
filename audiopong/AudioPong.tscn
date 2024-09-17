@@ -1,12 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://ckcgn82n5p0tl"]
+[gd_scene load_steps=18 format=3 uid="uid://ckcgn82n5p0tl"]
 
 [ext_resource type="Script" path="res://play_area.gd" id="1_6o025"]
 [ext_resource type="Script" path="res://ball.gd" id="1_8jdvn"]
 [ext_resource type="Script" path="res://scorekeeper.gd" id="1_fdqwc"]
-[ext_resource type="AudioStream" uid="uid://dg7qpk43qcq0a" path="res://musicalball.mp3" id="3_v7a4m"]
-[ext_resource type="AudioStream" uid="uid://dhv7jfemcrros" path="res://impact.mp3" id="4_40nlw"]
+[ext_resource type="AudioStream" uid="uid://b4ra1vng6n0my" path="res://8-bit-kit-kick-9.wav" id="4_pf4cd"]
 [ext_resource type="Script" path="res://paddle.gd" id="4_xmwbc"]
+[ext_resource type="AudioStream" uid="uid://bj825wp50ttc8" path="res://8-bit-kit-boop_C.wav" id="5_3mmhk"]
 [ext_resource type="Script" path="res://aipaddle.gd" id="5_vvxoe"]
+[ext_resource type="AudioStream" uid="uid://bltoqcje13of0" path="res://Score.mp3" id="7_cpm1n"]
+[ext_resource type="AudioStream" uid="uid://cjm2hm5u8kghf" path="res://8-bit-explosion_F.wav" id="8_bj6l3"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_m1an5"]
 
@@ -48,14 +50,14 @@ texture = SubResource("CanvasTexture_m1an5")
 shape = SubResource("RectangleShape2D_hf628")
 
 [node name="AnnoyingMusic" type="AudioStreamPlayer2D" parent="PlayArea/Ball"]
-stream = ExtResource("3_v7a4m")
+stream = ExtResource("4_pf4cd")
 autoplay = true
 max_distance = 1600.0
-attenuation = 3.0
+attenuation = 4.0
 panning_strength = 10.0
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="PlayArea/Ball"]
-stream = ExtResource("4_40nlw")
+stream = ExtResource("5_3mmhk")
 max_distance = 1600.0
 attenuation = 2.0
 
@@ -104,12 +106,18 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea/Top"]
 shape = SubResource("RectangleShape2D_vgrj8")
 
+[node name="Score" type="AudioStreamPlayer2D" parent="PlayArea/Top"]
+stream = ExtResource("7_cpm1n")
+
 [node name="Bottom" type="Area2D" parent="PlayArea"]
 position = Vector2(399, 1191)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea/Bottom"]
 shape = SubResource("RectangleShape2D_vgrj8")
+
+[node name="Loss" type="AudioStreamPlayer2D" parent="PlayArea/Bottom"]
+stream = ExtResource("8_bj6l3")
 
 [node name="Paddle" type="Area2D" parent="."]
 position = Vector2(400, 1125)

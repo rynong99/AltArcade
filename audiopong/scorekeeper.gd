@@ -16,17 +16,19 @@ func _process(delta: float) -> void:
 
 func _on_top_area_entered(area: Area2D) -> void:
 	player_score += 1
+	$PlayArea/Top/Score.play()
 	reset() # Replace with function body.
 
 
 func _on_bottom_area_entered(area: Area2D) -> void:
 	CPU_score += 1 # Replace with function body.
+	$PlayArea/Bottom/Loss.play()
 	reset()
 	
 func reset():
 	$PlayArea.position.x = 0;
 	$PlayArea/Ball.position.x = 600;
 	$PlayArea/Ball.position.y = 800;
-	$PlayArea/Ball.speed = Vector2(200,200);
+	$PlayArea/Ball.speed = Vector2(100,100);
 	$PlayArea/Paddle.position.x = 600;
 	

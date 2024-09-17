@@ -15,23 +15,23 @@ func _process(delta: float) -> void:
 			global_position.x = 500
 	elif Input.is_action_pressed("Left"):
 		if global_position.x < 300:
-			global_position.x += speed * delta * 7
+			global_position.x += speed * delta * 5
 		elif global_position.x > 300:
-			global_position.x -= speed * delta * 7
+			global_position.x -= speed * delta * 5
 		else:
 			global_position.x = 300
 	elif Input.is_action_pressed("Center"):
 		global_position.x = 200
 	elif Input.is_action_pressed("FarRight"):
 		if global_position.x > -100:
-			global_position.x -= speed * delta * 7
+			global_position.x -= speed * delta * 5
 		else:
 			global_position.x = -100
 	elif Input.is_action_pressed("Right"):
 		if global_position.x > 100:
-			global_position.x -= speed * delta * 7
+			global_position.x -= speed * delta * 5
 		elif global_position.x < 100:
-			global_position.x += speed * delta * 7
+			global_position.x += speed * delta * 5
 		else:
 			global_position.x = 100
 
