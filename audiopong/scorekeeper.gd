@@ -27,8 +27,8 @@ func _on_bottom_area_entered(area: Area2D) -> void:
 	
 func reset():
 	$PlayArea.position.x = 0;
-	$PlayArea/Ball.position.x = 600;
-	$PlayArea/Ball.position.y = 800;
-	$PlayArea/Ball.speed = Vector2(100,100);
+	$PlayArea/Ball.position.x = 400;
+	$PlayArea/Ball.position.y = 600;
+	$PlayArea/Ball.speed = Vector2(-50,-250);
 	$PlayArea/Paddle.position.x = 600;
 	

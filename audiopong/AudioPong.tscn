@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scorekeeper.gd" id="1_fdqwc"]
 [ext_resource type="AudioStream" uid="uid://b4ra1vng6n0my" path="res://8-bit-kit-kick-9.wav" id="4_pf4cd"]
 [ext_resource type="Script" path="res://paddle.gd" id="4_xmwbc"]
-[ext_resource type="AudioStream" uid="uid://bj825wp50ttc8" path="res://8-bit-kit-boop_C.wav" id="5_3mmhk"]
+[ext_resource type="AudioStream" uid="uid://dhv7jfemcrros" path="res://impact.mp3" id="5_p0in2"]
 [ext_resource type="Script" path="res://aipaddle.gd" id="5_vvxoe"]
 [ext_resource type="AudioStream" uid="uid://bltoqcje13of0" path="res://Score.mp3" id="7_cpm1n"]
 [ext_resource type="AudioStream" uid="uid://cjm2hm5u8kghf" path="res://8-bit-explosion_F.wav" id="8_bj6l3"]
@@ -40,7 +40,7 @@ script = ExtResource("1_6o025")
 [node name="Ball" type="Area2D" parent="PlayArea"]
 position = Vector2(400, 600)
 script = ExtResource("1_8jdvn")
-speed = Vector2(250, 250)
+speed = Vector2(0, -200)
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayArea/Ball"]
 scale = Vector2(20, 20)
@@ -51,15 +51,26 @@ shape = SubResource("RectangleShape2D_hf628")
 
 [node name="AnnoyingMusic" type="AudioStreamPlayer2D" parent="PlayArea/Ball"]
 stream = ExtResource("4_pf4cd")
+volume_db = -25.0
+pitch_scale = 0.5
 autoplay = true
 max_distance = 1600.0
+attenuation = 5.0
+panning_strength = 15.0
+
+[node name="AnnoyingMusic2" type="AudioStreamPlayer2D" parent="PlayArea/Ball"]
+stream = ExtResource("4_pf4cd")
+volume_db = -20.0
+autoplay = true
+max_distance = 800.0
 attenuation = 4.0
-panning_strength = 10.0
+panning_strength = 15.0
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="PlayArea/Ball"]
-stream = ExtResource("5_3mmhk")
+stream = ExtResource("5_p0in2")
+volume_db = -10.0
 max_distance = 1600.0
-attenuation = 2.0
+attenuation = 3.0
 
 [node name="Sprite2D2" type="Sprite2D" parent="PlayArea"]
 position = Vector2(815, 585.5)
@@ -96,7 +107,7 @@ scale = Vector2(227, 21)
 texture = SubResource("CanvasTexture_1sfdf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea/Paddle"]
-position = Vector2(1, 0)
+position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_8ysux")
 
 [node name="Top" type="Area2D" parent="PlayArea"]
@@ -118,6 +129,8 @@ shape = SubResource("RectangleShape2D_vgrj8")
 
 [node name="Loss" type="AudioStreamPlayer2D" parent="PlayArea/Bottom"]
 stream = ExtResource("8_bj6l3")
+volume_db = -20.0
+pitch_scale = 0.5
 
 [node name="Paddle" type="Area2D" parent="."]
 position = Vector2(400, 1125)
@@ -130,7 +143,7 @@ scale = Vector2(227, 21)
 texture = SubResource("CanvasTexture_1sfdf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Paddle"]
-position = Vector2(1, 0)
+position = Vector2(1, 1.5)
 shape = SubResource("RectangleShape2D_8ysux")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="Paddle"]
